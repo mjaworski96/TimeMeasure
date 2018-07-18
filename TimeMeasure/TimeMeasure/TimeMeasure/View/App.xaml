@@ -3,8 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TimeMeasure.View.App">
 	<Application.Resources>
-
-		<!-- Application resource dictionary -->
-
-	</Application.Resources>
+        <ResourceDictionary>
+            <Style x:Key="DeleteButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="Red" />
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+            <Style x:Key="ApplyButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="Blue" />
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>
