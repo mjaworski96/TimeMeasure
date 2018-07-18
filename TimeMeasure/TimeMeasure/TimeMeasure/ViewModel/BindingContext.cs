@@ -14,10 +14,10 @@ namespace TimeMeasure.ViewModel
         public const string DURATION_FORMAT = @"hh\:mm\:ss";
         private const int UPDATE_WAIT_TIME = 1000;
 
-
         private IDialog dialogManager;
         private ViewModelPeriod lastPeriod;
         private TimePeriodContainer container;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public BindingContext(IDialog dialog)
@@ -33,9 +33,10 @@ namespace TimeMeasure.ViewModel
                 ObservableCollection<ViewModelPeriod> periods = container
                     .Periods
                     .Select(x => new ViewModelPeriod(x, this))
+                    .Reverse()
                     .ToObervableCollection();
 
-                lastPeriod = periods.LastOrDefault();
+                lastPeriod = periods.FirstOrDefault();
 
                 return periods;
             }
