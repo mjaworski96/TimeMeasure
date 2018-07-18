@@ -136,6 +136,7 @@ namespace TimeMeasure.Model
         internal void Delete(TimePeriod period)
         {
             periods.Remove(period);
+            Save();
         }
 
         public List<TimePeriod> Periods { get => periods; }
