@@ -1,0 +1,9 @@
+﻿using System.Threading.Tasks;
+
+namespace TimeMeasure.ViewModel
+{
+    public interface IDialog
+    {
+        Task<bool> YesNoDialog(string title, string message);
+    }
+}
