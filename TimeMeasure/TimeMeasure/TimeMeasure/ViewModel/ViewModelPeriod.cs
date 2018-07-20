@@ -33,13 +33,7 @@ namespace TimeMeasure.ViewModel
             }
         }
         public string Duration
-        {
-            get
-            {
-                return period.Duration.ToString(
-                        BindingContext.DURATION_FORMAT);
-            }
-        }
+        {  get => BindingContext.FormatTimeSpan(period.Duration); }
 
         public ViewModelPeriod(TimePeriod period, BindingContext bindingContext)
         {

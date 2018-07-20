@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading;
@@ -11,7 +12,6 @@ namespace TimeMeasure.ViewModel
 {
     public class BindingContext : INotifyPropertyChanged
     {
-        public const string DURATION_FORMAT = @"hh\:mm\:ss";
         private const int UPDATE_WAIT_TIME = 1000;
 
         private IDialog dialogManager;
@@ -19,6 +19,11 @@ namespace TimeMeasure.ViewModel
         private TimePeriodContainer container;
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public static string FormatTimeSpan(TimeSpan timeSpan)
+        {
+            return string.Format("{0}:{1:mm}:{1:ss}", (int)timeSpan.TotalHours, timeSpan);
+        }
 
         public BindingContext(IDialog dialog)
         {
@@ -42,28 +47,14 @@ namespace TimeMeasure.ViewModel
             }
         }
         public string TotalTime
-        {
-            get
-            {
-                return container.TotalDuration.ToString(DURATION_FORMAT);
-            }
-        }
+        { get => FormatTimeSpan(container.TotalDuration); }
         public string DayTotalTime
-        {
-            get
-            {
-                return container.DayTotalDuration.ToString(DURATION_FORMAT);
-            }
-        }
+        { get => FormatTimeSpan(container.DayTotalDuration); }
         public string WeekTotalTime
-        {
-            get
-            {
-                return container.WeekTotalDuration.ToString(DURATION_FORMAT);
-            }
-        }
+        { get => FormatTimeSpan(container.WeekTotalDuration);}
         public string MonthTotalTime
-        { get => container.MonthTotalDuration.ToString(DURATION_FORMAT); }
+        { get => FormatTimeSpan(container.MonthTotalDuration); }
+
         public string MainButtonText
         {
             get
