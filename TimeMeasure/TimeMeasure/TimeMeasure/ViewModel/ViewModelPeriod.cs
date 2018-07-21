@@ -45,7 +45,7 @@ namespace TimeMeasure.ViewModel
 
         private void DeleteAction()
         {
-            bindingContext.DeleteAsync(period);
+            bindingContext.Delete(period);
         }
     }
 }

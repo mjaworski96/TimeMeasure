@@ -9,7 +9,7 @@ namespace TimeMeasure.View
 {
     public class Dialog : IDialog
     {
-        Page page;
+        private Page page;
 
         public Dialog(Page page)
         {

@@ -29,7 +29,7 @@ namespace TimeMeasure.ViewModel
         {
             dialogManager = dialog;
             container = new TimePeriodContainer();
-            Task.Run(() => UpdateTime());
+            Task.Run(() => UpdateTimeThread());
         }
 
         public ObservableCollection<ViewModelPeriod> Periods
@@ -48,34 +48,25 @@ namespace TimeMeasure.ViewModel
             }
         }
         public string TotalTime
-        { get => FormatTimeSpan(container.TotalDuration); }
+            { get => FormatTimeSpan(container.TotalDuration); }
         public string DayTotalTime
-        { get => FormatTimeSpan(container.DayTotalDuration); }
+            { get => FormatTimeSpan(container.DayTotalDuration); }
         public string WeekTotalTime
-        { get => FormatTimeSpan(container.WeekTotalDuration);}
+            { get => FormatTimeSpan(container.WeekTotalDuration);}
         public string MonthTotalTime
-        { get => FormatTimeSpan(container.MonthTotalDuration); }
+            { get => FormatTimeSpan(container.MonthTotalDuration); }
 
         public string MainButtonText
-        {
-            get
-            {
-                if (container.IsActive)
-                    return "STOP";
-                else
-                    return "START";
-            }
-        }
+            { get => container.IsActive ? "STOP" : "START"; }
         public ICommand MainButtonCommand
-        { get => new DelegateCommand(MainButtonAction); }
+            { get => new DelegateCommand(MainButtonAction); }
         public ICommand ResetButtonCommand
-        { get => new DelegateCommand(ResetButtonActionAsync); }
+            { get => new DelegateCommand(ResetButtonActionAsync); }
 
         private void MainButtonAction()
         {
             container.PerformClick();
-            NotifyPropertyChanged("MainButtonText");
-            NotifyPropertyChanged("Periods");
+            UpdateUI();
         }
         private async void ResetButtonActionAsync()
         {
@@ -83,34 +74,42 @@ namespace TimeMeasure.ViewModel
             if (result)
             {
                 container.Clear();
-                NotifyPropertyChanged("MainButtonText");
-                NotifyPropertyChanged("Periods");
+                UpdateUI();
             }
         }
         private void NotifyPropertyChanged(string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        private void UpdateTime()
+        private void UpdateTimeThread()
         {
             while (true)
             {
-                NotifyPropertyChanged("TotalTime");
-                NotifyPropertyChanged("DayTotalTime");
-                NotifyPropertyChanged("WeekTotalTime");
-                NotifyPropertyChanged("MonthTotalTime");
-                lastPeriod?.NotifyPropertyChanged("Duration");
+                UpdateTime();
                 Thread.Sleep(UPDATE_WAIT_TIME);
             }
         }
-        internal async void DeleteAsync(TimePeriod period)
+        private void UpdateTime()
+        {
+            NotifyPropertyChanged("TotalTime");
+            NotifyPropertyChanged("DayTotalTime");
+            NotifyPropertyChanged("WeekTotalTime");
+            NotifyPropertyChanged("MonthTotalTime");
+            lastPeriod?.NotifyPropertyChanged("Duration");
+        }
+        private void UpdateUI()
+        {
+            UpdateTime();
+            NotifyPropertyChanged("MainButtonText");
+            NotifyPropertyChanged("Periods");
+        }
+        internal async void Delete(TimePeriod period)
         {
             bool result = await dialogManager.YesNoDialog("Clear data", "Do you want remove this period?");
             if (result)
             {
                 container.Delete(period);
-                NotifyPropertyChanged("MainButtonText");
-                NotifyPropertyChanged("Periods");
+                UpdateUI();
             }
         }
     }
