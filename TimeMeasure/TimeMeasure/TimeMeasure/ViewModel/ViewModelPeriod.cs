@@ -29,7 +29,7 @@ namespace TimeMeasure.ViewModel
                     return period.EndDate.Value.ToString(
                         TimePeriod.DATE_FORMAT);
                 else
-                    return "------------ ---------";
+                    return "Not Finished";
             }
         }
         public string Duration

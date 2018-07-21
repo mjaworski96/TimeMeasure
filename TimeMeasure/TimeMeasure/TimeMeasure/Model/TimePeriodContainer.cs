@@ -16,7 +16,9 @@ namespace TimeMeasure.Model
             periods = new List<TimePeriod>();
             Load();
         }
-        public string FileName { get => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), FILE_NAME); }
+        public string FileName
+        { get => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), FILE_NAME); }
+
         public void Load()
         {
             using (StreamReader reader = new StreamReader(new FileStream(
@@ -44,12 +46,8 @@ namespace TimeMeasure.Model
             Save();
         }
         public bool IsActive
-        {
-            get
-            {
-                return periods.LastOrDefault()?.Active ?? false;
-            }
-        }
+            { get => periods.LastOrDefault()?.Active ?? false; }
+
         public void PerformClick()
         {
             if (IsActive)

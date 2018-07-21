@@ -22,7 +22,10 @@ namespace TimeMeasure.ViewModel
 
         public static string FormatTimeSpan(TimeSpan timeSpan)
         {
-            return string.Format("{0}:{1:mm}:{1:ss}", (int)timeSpan.TotalHours, timeSpan);
+            int hours = (int)timeSpan.TotalHours;
+            return string.Format("{00}:{1:mm}:{1:ss}",
+                hours < 10 ? "0" + hours : hours.ToString(), 
+                timeSpan);
         }
 
         public BindingContext(IDialog dialog) :
