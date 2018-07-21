@@ -14,7 +14,7 @@
             android:layout_width="35dip"
             android:layout_height="35dip"
             android:layout_marginLeft="15dip"
-            android:layout_marginTop="60dip"
+            android:layout_marginTop="66dip"
             android:layout_marginBottom="54.5dp" />
     </RelativeLayout>
     <LinearLayout
@@ -26,6 +26,14 @@
             android:text="Time Measure Widget"
             android:textColor="#003082"
             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp" />
+        <TextView
+            android:id="@+id/widgetCurrent"
+            android:text="Day time: 00:00"
+            android:textColor="#003082"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp" />

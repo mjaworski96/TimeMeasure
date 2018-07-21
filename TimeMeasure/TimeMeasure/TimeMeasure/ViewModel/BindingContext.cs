@@ -63,7 +63,8 @@ namespace TimeMeasure.ViewModel
             { get => FormatTimeSpan(container.WeekTotalDuration);}
         public string MonthTotalTime
             { get => FormatTimeSpan(container.MonthTotalDuration); }
-
+        public string CurrentTotalTime
+            { get => lastPeriod == null ? "00:00:00" : lastPeriod.Duration; }
         public string MainButtonText
             { get => container.IsActive ? "STOP" : "START"; }
         public ICommand MainButtonCommand

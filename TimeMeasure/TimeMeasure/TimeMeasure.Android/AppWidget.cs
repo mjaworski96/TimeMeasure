@@ -36,6 +36,7 @@ namespace TimeMeasure.Droid.Widget
         private void UpdateTime(RemoteViews widgetView)
         {
             BindingContext bindingContext = new BindingContext();
+            widgetView.SetTextViewText(Resource.Id.widgetCurrent, "Current: " + bindingContext.CurrentTotalTime);
             widgetView.SetTextViewText(Resource.Id.widgetDay, "Day: " + bindingContext.DayTotalTime);
             widgetView.SetTextViewText(Resource.Id.widgetWeek, "Week: " + bindingContext.WeekTotalTime);
             widgetView.SetTextViewText(Resource.Id.widgetMonth, "Month: " + bindingContext.MonthTotalTime);
