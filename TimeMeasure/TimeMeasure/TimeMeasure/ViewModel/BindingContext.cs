@@ -26,6 +26,7 @@ namespace TimeMeasure.ViewModel
             container = new TimePeriodContainer();
             Task.Run(() => UpdateTime());
         }
+
         public ObservableCollection<ViewModelPeriod> Periods
         {
             get
