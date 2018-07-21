@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace TimeMeasure.View
 {
-	public partial class App : Application
+    public partial class App : Application
 	{
 		public App ()
 		{
 			InitializeComponent();
 
-			MainPage = new TimeMeasure.View.MainPage();
+			MainPage = new MainPage();
 		}
 
 		protected override void OnStart ()
@@ -28,7 +23,8 @@ namespace TimeMeasure.View
 
 		protected override void OnResume ()
 		{
-			// Handle when your app resumes
-		}
+            ((MainPage)MainPage).Refresh();
+
+        }
 	}
 }

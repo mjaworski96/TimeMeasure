@@ -25,13 +25,21 @@ namespace TimeMeasure.ViewModel
             return string.Format("{0}:{1:mm}:{1:ss}", (int)timeSpan.TotalHours, timeSpan);
         }
 
-        public BindingContext(IDialog dialog)
+        public BindingContext(IDialog dialog) :
+            this()
         {
             dialogManager = dialog;
             container = new TimePeriodContainer();
             Task.Run(() => UpdateTimeThread());
         }
-
+        public BindingContext()
+        {
+            container = new TimePeriodContainer();
+        }
+        public void Refresh()
+        {
+            container.Load();
+        }
         public ObservableCollection<ViewModelPeriod> Periods
         {
             get

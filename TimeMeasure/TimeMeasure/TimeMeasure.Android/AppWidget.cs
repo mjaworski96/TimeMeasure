@@ -12,7 +12,6 @@ namespace TimeMeasure.Droid.Widget
     public class AppWidget : AppWidgetProvider
     {
         private static string ButtonClick = "ButtonClickTag";
-        private BindingContext bindingContext = new BindingContext(null);
 
         public override void OnUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds)
         {
@@ -36,6 +35,7 @@ namespace TimeMeasure.Droid.Widget
         }
         private void UpdateTime(RemoteViews widgetView)
         {
+            BindingContext bindingContext = new BindingContext();
             widgetView.SetTextViewText(Resource.Id.widgetDay, "Day: " + bindingContext.DayTotalTime);
             widgetView.SetTextViewText(Resource.Id.widgetWeek, "Week: " + bindingContext.WeekTotalTime);
             widgetView.SetTextViewText(Resource.Id.widgetMonth, "Month: " + bindingContext.MonthTotalTime);
@@ -66,7 +66,7 @@ namespace TimeMeasure.Droid.Widget
 
             if (ButtonClick.Equals(intent.Action))
             {
-                this.bindingContext.MainButtonCommand.Execute(null);
+                new BindingContext().MainButtonCommand.Execute(null);
             }
         }
     }

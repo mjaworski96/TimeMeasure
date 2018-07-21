@@ -11,5 +11,9 @@ namespace TimeMeasure.View
                 new Dialog(this));
 			InitializeComponent();
 		}
+        public void Refresh()
+        {
+            ((BindingContext)BindingContext).Refresh();
+        }
 	}
 }
