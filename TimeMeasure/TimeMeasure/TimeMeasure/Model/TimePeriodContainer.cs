@@ -94,7 +94,7 @@ namespace TimeMeasure.Model
             {
                 TimeSpan timeSpan = TimeSpan.Zero;
                 DateTime today = DateTime.Now.Date;
-                foreach (var item in periods.NormalizeTimePeriods().Where(x =>
+                foreach (var item in NormalizedPeriods.Where(x =>
                     x.StartDate.Date == today))
                 {
                     timeSpan += item.Duration;
@@ -109,7 +109,7 @@ namespace TimeMeasure.Model
                 TimeSpan timeSpan = TimeSpan.Zero;
                 DateTime now = DateTime.Now;
                 int currentWeekOfYear = GetWeekOfYear(now);
-                foreach (var item in periods.NormalizeTimePeriods().Where(x => 
+                foreach (var item in NormalizedPeriods.Where(x => 
                     GetWeekOfYear(x.StartDate) == currentWeekOfYear 
                     && x.StartDate.Year == now.Year))
                 {
@@ -124,7 +124,7 @@ namespace TimeMeasure.Model
             {
                 TimeSpan timeSpan = TimeSpan.Zero;
                 int currentMonth = DateTime.Now.Month;
-                foreach (var item in periods.NormalizeTimePeriods().Where(x =>
+                foreach (var item in NormalizedPeriods.Where(x =>
                     x.StartDate.Month == currentMonth))
                 {
                     timeSpan += item.Duration;
@@ -140,5 +140,6 @@ namespace TimeMeasure.Model
         }
 
         public List<TimePeriod> Periods { get => periods; }
+        public IEnumerable<TimePeriod> NormalizedPeriods { get => periods.NormalizeTimePeriods(); }
     }
 }

@@ -41,14 +41,18 @@ namespace TimeMeasure.Model
             StartDate = startDate;
             EndDate = endDate;
         }
-
+        public static DateTime CreateExactDateTimeNow()
+        {
+            DateTime now = DateTime.Now;
+            return new DateTime(now.Year, now.Month, now.Day, now.Hour, now.Minute, now.Second);
+        }
         public static TimePeriod BeginNew()
         {
-            return new TimePeriod(DateTime.Now);
+            return new TimePeriod(CreateExactDateTimeNow());
         }
         public void Finish()
         {
-            EndDate = DateTime.Now;
+            EndDate = CreateExactDateTimeNow();
         }
         public void Save(StreamWriter writer)
         {
