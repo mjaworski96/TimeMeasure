@@ -13,7 +13,6 @@ namespace TimeMeasure.Model
         private const string FILE_NAME = "app.data.txt";
         public TimePeriodContainer()
         {
-            periods = new List<TimePeriod>();
             Load();
         }
         public string FileName
@@ -21,6 +20,7 @@ namespace TimeMeasure.Model
 
         public void Load()
         {
+            periods = new List<TimePeriod>();
             using (StreamReader reader = new StreamReader(new FileStream(
                 FileName, FileMode.OpenOrCreate)))
             {
