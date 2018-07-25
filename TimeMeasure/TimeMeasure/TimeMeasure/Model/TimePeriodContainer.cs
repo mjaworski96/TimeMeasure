@@ -137,7 +137,7 @@ namespace TimeMeasure.Model
             Save();
         }
 
-        public List<TimePeriod> Periods { get => periods; }
+        public List<TimePeriod> Periods { get => periods.OrderBy(x => x.StartDate).ToList(); }
         public IEnumerable<TimePeriod> NormalizedPeriods { get => periods.NormalizeTimePeriods(); }
     }
 }

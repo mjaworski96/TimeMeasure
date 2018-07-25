@@ -42,6 +42,7 @@ namespace TimeMeasure.ViewModel
         public void Refresh()
         {
             container.Load();
+            UpdateUI();
         }
         public ObservableCollection<ViewModelPeriod> Periods
         {
@@ -67,7 +68,9 @@ namespace TimeMeasure.ViewModel
         public string MonthTotalTime
             { get => FormatTimeSpan(container.MonthTotalDuration); }
         public string CurrentTotalTime
-            { get => Periods.FirstOrDefault() == null ? "00:00:00" : Periods.FirstOrDefault().Duration; }
+            { get => (Periods.FirstOrDefault() == null) || 
+                Periods.FirstOrDefault().End != "Not Finished" 
+                ? "00:00:00" : Periods.FirstOrDefault().Duration; }
         public string MainButtonText
             { get => container.IsActive ? "STOP" : "START"; }
         public ICommand MainButtonCommand
