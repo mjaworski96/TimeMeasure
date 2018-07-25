@@ -16,7 +16,7 @@ namespace TimeMeasure.Model
             Load();
         }
         public string FileName
-        { get => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), FILE_NAME); }
+            { get => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), FILE_NAME); }
 
         public void Load()
         {
