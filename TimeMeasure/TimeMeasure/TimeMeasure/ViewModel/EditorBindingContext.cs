@@ -41,7 +41,7 @@ namespace TimeMeasure.ViewModel
         { get => new DelegateCommand(Commit); }
         public ICommand ExitButtonCommand
         { get => new DelegateCommand(Exit); }
-        public string DateFormat
+        public string DateTimeFormat
         { get => TimePeriod.DATE_FORMAT; }
 
         private void Reset()
