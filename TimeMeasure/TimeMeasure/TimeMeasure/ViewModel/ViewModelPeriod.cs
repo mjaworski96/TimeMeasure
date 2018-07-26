@@ -42,6 +42,7 @@ namespace TimeMeasure.ViewModel
         }
         public ICommand DeleteCommand
         { get => new DelegateCommand(DeleteAction); }
+        public TimePeriod Period { get => period; set => period = value; }
 
         private void DeleteAction()
         {

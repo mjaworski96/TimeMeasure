@@ -8,7 +8,7 @@ namespace TimeMeasure.View
 		{
 			InitializeComponent();
 
-			MainPage = new MainPage();
+			MainPage = new MainPage(new PageApp(this));
 		}
 
 		protected override void OnStart ()

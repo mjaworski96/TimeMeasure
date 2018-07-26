@@ -12,6 +12,9 @@
                 <Setter Property="BackgroundColor" Value="Blue" />
                 <Setter Property="TextColor" Value="White" />
             </Style>
+            <Style x:Key="NeutralButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#F6FD26" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

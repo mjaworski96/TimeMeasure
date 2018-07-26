@@ -42,12 +42,12 @@
             <Button Grid.Row="0" Text="{Binding MainButtonText, Mode=OneWay}" 
                     Command="{Binding MainButtonCommand, Mode=OneWay}"
                     Style="{StaticResource ApplyButton}"/>
-            <Button Grid.Row="1" Text="CLEAR" 
+            <Button Grid.Row="1" Text="Clear" 
                     Command="{Binding ResetButtonCommand, Mode=OneWay}"
                     Style="{StaticResource DeleteButton}"/>
         </Grid>
         <Grid Grid.Row="2">
-            <ListView ItemsSource="{Binding Periods}">
+            <ListView ItemsSource="{Binding Periods}" SelectedItem="{Binding SelectedPeriod}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

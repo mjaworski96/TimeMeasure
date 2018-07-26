@@ -16,6 +16,11 @@ namespace TimeMeasure.View
             this.page = page;
         }
 
+        public async Task WarningDialog(string title, string message)
+        {
+            await page.DisplayAlert(title, message, "OK");
+        }
+
         public async Task<bool> YesNoDialog(string title, string message)
         {
             return await page.DisplayAlert(title, message, "Yes", "No");

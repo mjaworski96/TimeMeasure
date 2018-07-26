@@ -30,11 +30,16 @@ namespace TimeMeasure.Model
                 }
             }
         }
+        public void AfterUpdate()
+        {
+            periods = Periods;
+            Save();
+        }
         public void Save()
         {
             using (StreamWriter writer = new StreamWriter(FileName))
             {
-                foreach (var item in periods)
+                foreach (var item in Periods)
                 {
                     item.Save(writer);
                 }

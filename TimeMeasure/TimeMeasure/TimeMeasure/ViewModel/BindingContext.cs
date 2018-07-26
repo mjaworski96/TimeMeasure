@@ -15,8 +15,10 @@ namespace TimeMeasure.ViewModel
         private const int UPDATE_WAIT_TIME = 1000;
 
         private IDialog dialogManager;
+        private IPageSetter pageSetter;
         private ViewModelPeriod lastPeriod;
         private TimePeriodContainer container;
+        private ViewModelPeriod selectedPeriod;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -24,20 +26,22 @@ namespace TimeMeasure.ViewModel
         {
             int hours = (int)timeSpan.TotalHours;
             return string.Format("{00}:{1:mm}:{1:ss}",
-                hours < 10 ? "0" + hours : hours.ToString(), 
+                hours < 10 ? "0" + hours : hours.ToString(),
                 timeSpan);
         }
 
-        public BindingContext(IDialog dialog) :
+        public BindingContext(IDialog dialog, IPageSetter pageSetter) :
             this()
         {
             dialogManager = dialog;
+            this.pageSetter = pageSetter;
             container = new TimePeriodContainer();
             Task.Run(() => UpdateTimeThread());
         }
         public BindingContext()
         {
             container = new TimePeriodContainer();
+            selectedPeriod = null;
         }
         public void Refresh()
         {
@@ -60,24 +64,46 @@ namespace TimeMeasure.ViewModel
             }
         }
         public string TotalTime
-            { get => FormatTimeSpan(container.TotalDuration); }
+        { get => FormatTimeSpan(container.TotalDuration); }
         public string DayTotalTime
-            { get => FormatTimeSpan(container.DayTotalDuration); }
+        { get => FormatTimeSpan(container.DayTotalDuration); }
         public string WeekTotalTime
-            { get => FormatTimeSpan(container.WeekTotalDuration);}
+        { get => FormatTimeSpan(container.WeekTotalDuration); }
         public string MonthTotalTime
-            { get => FormatTimeSpan(container.MonthTotalDuration); }
+        { get => FormatTimeSpan(container.MonthTotalDuration); }
         public string CurrentTotalTime
-            { get => (Periods.FirstOrDefault() == null) || 
-                Periods.FirstOrDefault().End != "Not Finished" 
-                ? "00:00:00" : Periods.FirstOrDefault().Duration; }
+        {
+            get => (Periods.FirstOrDefault() == null) ||
+              Periods.FirstOrDefault().End != "Not Finished"
+              ? "00:00:00" : Periods.FirstOrDefault().Duration;
+        }
         public string MainButtonText
-            { get => container.IsActive ? "STOP" : "START"; }
+        { get => container.IsActive ? "Stop" : "Start"; }
         public ICommand MainButtonCommand
-            { get => new DelegateCommand(MainButtonAction); }
+        { get => new DelegateCommand(MainButtonAction); }
         public ICommand ResetButtonCommand
-            { get => new DelegateCommand(ResetButtonActionAsync); }
-
+        { get => new DelegateCommand(ResetButtonActionAsync); }
+        public ViewModelPeriod SelectedPeriod
+        {
+            get
+            {
+                return selectedPeriod;
+            }
+            set
+            {
+                if(value != null && !value.Period.Active)
+                {
+                    pageSetter.SetEditorPage(new EditorBindingContext(pageSetter,
+                        value.Period, AfterUpdate));
+                }
+                selectedPeriod = value;
+            }
+        }
+        private void AfterUpdate()
+        {
+            UpdateUI();
+            container.AfterUpdate();
+        }
         private void MainButtonAction()
         {
             container.PerformClick();

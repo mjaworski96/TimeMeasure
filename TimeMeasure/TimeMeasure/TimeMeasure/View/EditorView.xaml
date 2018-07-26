@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TimeMeasure.View.EditorView">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Text="Format: "/>
+            <Label Grid.Row="0" Grid.Column="1" Text="{Binding DateTimeFormat, Mode=OneWay}"/>
+
+            <Label Grid.Row="1" Grid.Column="0" Text="Start date: "/>
+            <Entry Grid.Row="1" Grid.Column="1" Text="{Binding Start}"/>
+
+            <Label Grid.Row="2" Grid.Column="0" Text="End date: "/>
+            <Entry Grid.Row="2" Grid.Column="1" Text="{Binding End}"/>
+
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Button Grid.Row="0" Text="Change" 
+                    Command="{Binding CommitButtonCommand, Mode=OneWay}"
+                    Style="{StaticResource ApplyButton}"/>
+            <Button Grid.Row="1" Text="Reset" 
+                    Command="{Binding ResetButtonCommand, Mode=OneWay}"
+                    Style="{StaticResource DeleteButton}"/>
+            <Button Grid.Row="2" Text="Return to main page" 
+                    Command="{Binding ExitButtonCommand, Mode=OneWay}"
+                    Style="{StaticResource NeutralButton}"/>
+        </Grid>
+    </Grid>
+</ContentPage>

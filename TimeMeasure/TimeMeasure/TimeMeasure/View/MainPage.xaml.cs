@@ -5,10 +5,11 @@ namespace TimeMeasure.View
 {
     public partial class MainPage : ContentPage
 	{
-		public MainPage()
+		public MainPage(PageApp pageApp)
 		{
             BindingContext = new BindingContext(
-                new Dialog(this));
+                new Dialog(this),
+                new PageSetter(pageApp, this));
 			InitializeComponent();
 		}
         public void Refresh()
